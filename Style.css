@@ -8,6 +8,12 @@ body {
     background-size: cover;
 }
 /* BỐ CỤC TỶ LỆ MÀN HÌNH VÀ HIỆU ỨNG*/
+ @media (min-width: 1024px) { .anhtesst{  margin-left: 100px ; margin-right: 100px;}}
+.test:hover {
+    transform: scale(1.13);
+    transition: transform 0.5s ease;
+    box-shadow: 0 4px 12px rgba(158, 50, 168, 0.9);
+    cursor: pointer; background: black;}
 
 .nen {
     background-color: #f3f9fb;
@@ -79,7 +85,7 @@ h1 {
 }
 .bamloiyeuthuong {
     border: solid #a78bfa;
-    padding: clamp(2px, 2vw, 20px);
+    padding: clamp(2px, 2vw, 8px);
     border-radius: clamp(10px, 8vw, 40px);
     background-color: #a78bfa;
     display: flex;
@@ -108,7 +114,7 @@ hr {
 .thuocphimkyniem {
     margin-top: clamp(80px, 20vw, 180px);
     text-align: center;
-    font-size: clamp(40px, 7vw, 80px);
+    font-size: clamp(30px, 7vw, 70px);
     margin-bottom: 50px;
     position: relative;
     font-weight: 700;
@@ -129,22 +135,21 @@ hr {
 }
 
 /* PHẦN ALBUM */
-.test { 
-    
+.test {
     width: clamp(20px, 20vw, 120px);
 
-    border-radius:  clamp(5px, 3vw, 15px);
+    border-radius: clamp(5px, 3vw, 15px);
     cursor: pointer;
     transition: all 1s ease;
 }
 
-.anhtesst { 
+.anhtesst {
     align-items: center;
     gap: clamp(7px, 4vw, 20px);
     justify-content: center;
     display: flex;
     flex-wrap: wrap;
 }
-.khoianhtest { 
+.khoianhtest {
     margin-top: clamp(70px, 20vw, 120px);
 }
