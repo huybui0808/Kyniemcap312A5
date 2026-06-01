@@ -87,7 +87,7 @@ h1 {
 }
 .linkloiyeuthuong {
     color: white;
-    font-size: clamp(14px, 3vw, 40px);
+    font-size: clamp(14px, 3vw, 25px);
 }
 
 @keyframes fadeInUp {
