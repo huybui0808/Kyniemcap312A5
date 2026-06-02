@@ -8,7 +8,11 @@ body {
     background-size: cover;
 }
 /* BỐ CỤC TỶ LỆ MÀN HÌNH VÀ HIỆU ỨNG*/
- @media (min-width: 1024px) { .anhtesst{  margin-left: 100px ; margin-right: 100px;}}
+ @media (min-width: 1024px) { 
+   .anhtesst{  margin-left: 70px ; margin-right: 70px;}
+ .test { 
+    width: 175px !important;}
+ }
 .test:hover {
     transform: scale(1.13);
     transition: transform 0.5s ease;
@@ -136,8 +140,7 @@ hr {
 
 /* PHẦN ALBUM */
 .test {
-    width: clamp(20px, 20vw, 120px);
-
+    width: 120px;
     border-radius: clamp(5px, 3vw, 15px);
     cursor: pointer;
     transition: all 1s ease;
@@ -145,7 +148,7 @@ hr {
 
 .anhtesst {
     align-items: center;
-    gap: clamp(7px, 4vw, 20px);
+    gap: clamp(4px, 4vw, 20px);
     justify-content: center;
     display: flex;
     flex-wrap: wrap;
@@ -153,3 +156,14 @@ hr {
 .khoianhtest {
     margin-top: clamp(70px, 20vw, 120px);
 }
+
+
+
+
+
+
+
+
+ 
+           
+
