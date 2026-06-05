@@ -44,10 +44,10 @@
                 cái nhìn mới
             </p>
             <div class="loiyeuthuong">
-                <a class="linkloiyeuthuong" href=""
+                <div class="linkloiyeuthuong nhanloiyeuthuong" 
                     ><p class="bamloiyeuthuong">
                         <b>Nhận lời yêu thương</b>
-                    </p></a
+                    </p></div
                 >
                 <a class="linkloiyeuthuong" href=""
                     ><p class="bamloiyeuthuong"><b>Gửi lời yêu thương</b></p></a
@@ -60,8 +60,8 @@
             <div class="thuocphimkyniem">
                 <h2 id="thanhvien" class="thuocphimkyniem">Thành Viên Test</h2>
             </div>
-
-            <!--PHẦN ALBTUM-->
+<div><hr /></div>
+             <!--PHẦN ALBTUM--> <div class="card"> 
             <div class="khoianhtest">
                 <div class="anhtesst">
                     <div
@@ -654,12 +654,14 @@
                     </div>
                 </div>
             </div>
-
+</div>
+          
+          
             <div><hr style="background: red" class="hr" /></div>
             <div class="thuocphimkyniem">
                 <h2 id="Album" class="thuocphimkyniem">Album 12A5</h2>
             </div>
-            <div>
+            <div class="manhinhdt">
                 <div class="album">
                     <div class="khungchuaalbum">
                         <!-- 0 -->
@@ -713,7 +715,10 @@
                     </div>
                 </div>
             </div>
-        </div>
+        
+        
+        
+        
 
         <!--  PHẦN CHUYỂN TIẾP ẢNH THÀNH VIÊN-->
         <div class="lightbox" id="lightbox">
@@ -723,5 +728,13 @@
             <button class="lightbox-next" id="lb-next">➡️</button>
         </div>
         <!--  PHẦN XEM ẢNH ALBUM NHÉ-->
+        
+        
+        
+        <!-- PHẦN NHẬN LỜI YÊU THƯƠNG NGẪU NHIÊN-->
+     <div class="nhanloiyeuthuong" id="popupLoi" >
+    <p id="noiDungLoi" style=""></p>
+   <button class="btnDong" onclick="document.getElementById('popupLoi').classList.remove('active'); setTimeout(() => document.getElementById('popupLoi').style.display='none', 300)">Đóng</button>
+</div>   
     </body>
 </html>

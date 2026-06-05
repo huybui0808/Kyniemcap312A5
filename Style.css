@@ -12,6 +12,8 @@ body {
  .lopphu .noidung { font-size: 10px !important; margin-top: 70px !important;
    
   }
+  #lb-next{ opacity: 0;}
+  #lb-prev{ opacity: 0;}
     .anhtesst {
         margin-left: 10px;
         margin-right: 10px;
@@ -37,45 +39,109 @@ body {
   .lopphu .noidung { font-size: 17px !important; margin-top: 130px !important;
    
   }
-  
+    
+.navbar  .danhsach{ margin-left: 50px ;
+}
+.navbar .danhsach:hover{ padding: 2px 20px; border: rgba(0, 0, 0, 0.3) 4px solid ;
+ ;}
+
  .chutieude h1 {font-size: 80px; 
 
   }
     .chutieude #duoichutieude p{font-size: 25px;
     } 
-    .anhtesst {
-        margin-left: 120px;
-        margin-right: 120px;
-    }
+    
     .anhcanhan {
         width: 180px !important;
     }
-   #lb-prev{ font-size: 50px;}
-   #lb-next{ font-size: 50px;}
-   .lightbox-prev { left: 30px;  }
-.lightbox-next { right: 30px; }
+   #lb-prev{ font-size: 50px; opacity: 2 !important;}
+   #lb-next{ font-size: 50px; opacity: 2 !important;}
+   .lightbox-prev { left: 90px !important;  }
+   .lightbox-next { right: 90px !important; }
+
+/* PHẦN XEM THÀNH VIÊN */
+
+#lightbox-thumbs {z-index: 999;
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+    overflow-x: auto;
+   width: 100%;
+    padding: 5px;
 }
+
+#lightbox-thumbs img {z-index: 999; display: none;
+    width: 40px !important;
+   height: 50px !important;
+    object-fit: cover;
+    border-radius: 6px;
+    cursor: pointer;
+    opacity: 0.5;
+    transition: opacity 0.2s ease;
+    flex-shrink: 0;
+    border: 2px solid transparent;
+}
+
+#lightbox-thumbs img.active {z-index: 999;
+    opacity: 1;
+    border: 2px solid white;
+}
+
+#lightbox-img {z-index: 999;
+    transition: opacity 0.3s ease;
+    height: 100% !important;
+   width: 100% !important;
+    object-fit: contain;
+  border-radius: 30px !important; 
+}
+
+#lightbox-thumbs { z-index: 999;
+    position: fixed;
+    bottom: 5px !important;
+    left: 0;
+    width: 100%;
+    flex-wrap: nowrap;
+    height: 50px!important;
+    align-items: center;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 5px;
+    box-sizing: border-box;
+}
+.card  { background-color:#faf5ff ;  width: 1300px;  margin: 0 auto!important; 
+  height: 900px !important; border: 0 !important;
+  overflow-x: hidden;   /* cắt ngang */ 
+  overflow-y: auto;     /* scroll dọc */
+}
+.manhinhdt{ display: none;}
+/*CHÈN LÊN BÊN TRÊN*/  
+}
+
+
 /* HẾT PHẦN KÍCH CỠ */
 
 .nen {
-    background-color: #f3f9fb;
+    background-color: #faf5ff;
 }
 
 /* PHẦN NAVBAR */
-.navbar {
+.navbar { display: flex;
     border: 0 solid;
     margin-top: clamp(10px, 3vw, 30px);
     margin-right: clamp(5px, 3vw, 30px);
     margin-left: clamp(5px, 3vw, 50px);
     font-size: clamp(18px, 3vw, 34px);
 }
-.danhsach {
-    margin-left: clamp(5px, 6vw, 160px);
+.danhsach { border-radius: 20px; border: 0px solid; padding: 3px 8px;
+border-color: #ec4899;
+   margin-left: 5px; 
     font-size: clamp(12px, 3vw, 24px);
 }
+.danhsach:hover { border-radius: 20px; border: 2px solid; padding: 3px 8px;
+border-color: #ec4899;}
 
 .link {
-    background: linear-gradient(to right, #a78bfa, #ec4899);
+    background: linear-gradient(to right, #c084fc, #f472b6);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     text-decoration: none;
@@ -162,14 +228,14 @@ body {
 hr { opacity: 0;
     background-color: red;
 }
-.thuocphimkyniem {
+.thuocphimkyniem , .Alum12a5 {
     margin-top: clamp(80px, 20vw, 180px);
     text-align: center;
     font-size: clamp(30px, 7vw, 70px);
     margin-bottom: 50px;
     position: relative;
     font-weight: 700;
-    background: linear-gradient(to right, #a78bfa, #ec4899);
+    background: linear-gradient(to right, #7c3aed, #db2777);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -181,11 +247,12 @@ hr { opacity: 0;
     transform: translateX(-50%);
     width: clamp(250px, 45vw, 600px);
     height: 4px;
-    background: linear-gradient(to right, #8b5cf6, #ec4899);
+    background: linear-gradient(to right, #7c3aed, #db2777);
     border-radius: 5px;
 }
 
 /* PHẦN ALBUM */
+.khoianhtesst{ margin-top: 5px;}
 .anhtesst {
    gap: 15px;
     display: flex;
@@ -265,7 +332,8 @@ hr { opacity: 0;
 }
 
 
-
+#lb-prev{ opacity: 0;}
+#lb-next{ opacity: 0;}
 
 
 
@@ -333,12 +401,12 @@ hr { opacity: 0;
 }
 
 #lightbox-thumbs img {z-index: 999;
-    width: 55px;
-    height: 55px;
+    width: 60px;
+   height: 60px;
     object-fit: cover;
     border-radius: 6px;
     cursor: pointer;
-    opacity: 0.5;
+    opacity: 0.7;
     transition: opacity 0.2s ease;
     flex-shrink: 0;
     border: 2px solid transparent;
@@ -351,23 +419,78 @@ hr { opacity: 0;
 
 #lightbox-img {z-index: 999;
     transition: opacity 0.3s ease;
-    width: 90vw;
-    height: 70vh; /* cố định chiều cao */
+    width: 400px;
+    /* cố định chiều cao */
     object-fit: contain;
-    border-radius: 10px;
+    border-radius: 20px;
 }
 
 #lightbox-thumbs { z-index: 999;
     position: fixed;
-    bottom: 50px;
+    bottom: 20px;
     left: 0;
     width: 100%;
     flex-wrap: nowrap;
-    height: 70px;
+    height: 120px;
     align-items: center;
     overflow-x: auto;
     overflow-y: hidden;
     padding: 5px;
     box-sizing: border-box;
 }
+.card  { background-color:#faf5ff ;  margin: 25px 25px; 
+  height: 1000px; border: 0 !important;
+  overflow-x: hidden;   /* cắt ngang */ 
+  overflow-y: auto;     /* scroll dọc */
+}
+/* Hiện thanh trượt trên Chrome/Safari */
+.card::-webkit-scrollbar {
+  height: 6px;           /* chiều cao thanh trượt ngang */
+  display: block;
+}
+
+.card::-webkit-scrollbar-track {
+  background: #e2e8f0;   /* màu nền track */
+  border-radius: 10px;
+}
+
+.card::-webkit-scrollbar-thumb {
+  background: #a78bfa;   /* màu thanh kéo - màu tím giống web bạn */
+  border-radius: 10px;
+}
+
+
+
+
+#popupLoi { width: 400px;
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.5);
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    z-index: 99999;
+    text-align: center;
+    
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    opacity: 0;
+}
+#noiDungLoi{ font-size:22px; margin-bottom:20px; font-family: "Dancing Script", cursive; 
   
+}
+
+#popupLoi.active {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+}
+.btnDong {
+    background: #a78bfa;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+}
