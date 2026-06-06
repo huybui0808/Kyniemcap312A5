@@ -4,6 +4,11 @@
 
 
 
+
+
+
+
+
 document.addEventListener('DOMContentLoaded', function() {
     let lbAnh = [], lbIndex = 0;
 
@@ -176,7 +181,137 @@ window.addEventListener('DOMContentLoaded', function() {
     const fade = document.getElementById('xemthemFade');
     if (card) { card.classList.add('collapsed'); }
     if (fade) { fade.style.display = 'block'; }
+
+    renderLuuBut();
 });
+
+// ===== PHẦN LƯU BÚT - JSONBIN =====
+const ADMIN_PASS = "HUYbuiTRUNG20081.";
+const BIN_ID = "6a2402c8f5f4af5e29c210b3";
+const API_KEY = "$2a$10$nQb8E2FsCr2IFBogT76xee7Obj2dzRiVQKxV9NEB4Qt6GDYxMfeve";
+const API_URL = `https://api.jsonbin.io/v3/b/${BIN_ID}`;
+
+let mauDaChon = "#fff9c4";
+let idDangXoa = null;
+let cachedData = [];
+
+function moFormLuuBut() {
+  document.getElementById("formLuuBut").style.display = "flex";
+  document.getElementById("inputNoiDung").value = "";
+  document.getElementById("inputKyTen").value = "";
+}
+function dongFormLuuBut() {
+  document.getElementById("formLuuBut").style.display = "none";
+}
+function chonMau(el) {
+  mauDaChon = el.dataset.mau;
+  document.querySelectorAll(".mau-option").forEach(e => e.classList.remove("active-mau"));
+  el.classList.add("active-mau");
+}
+
+async function layDuLieu() {
+  const res = await fetch(API_URL + "/latest", {
+    headers: { "X-Master-Key": API_KEY }
+  });
+  const json = await res.json();
+  return json.record.luubut || [];
+}
+
+async function luuDuLieu(data) {
+  await fetch(API_URL, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      "X-Master-Key": API_KEY
+    },
+    body: JSON.stringify({ luubut: data })
+  });
+}
+
+async function luuLuuBut() {
+  const noiDung = document.getElementById("inputNoiDung").value.trim();
+  const kyTen   = document.getElementById("inputKyTen").value.trim();
+  if (!noiDung) { alert("Bạn chưa viết nội dung!"); return; }
+  if (!kyTen)   { alert("Bạn chưa ký tên!"); return; }
+
+  const btnGui = document.querySelector("#formLuuBut .btn-guibut");
+  btnGui.textContent = "⏳ Đang gửi...";
+  btnGui.disabled = true;
+
+  try {
+    const data = await layDuLieu();
+    data.unshift({
+      id: Date.now(), noiDung, kyTen, mau: mauDaChon,
+      thoiGian: new Date().toLocaleDateString("vi-VN")
+    });
+    await luuDuLieu(data);
+    cachedData = data;
+    dongFormLuuBut();
+    renderLuuBut();
+  } catch(e) {
+    alert("Lỗi kết nối, thử lại nhé!");
+  } finally {
+    btnGui.textContent = "💾 Gửi lời lưu bút";
+    btnGui.disabled = false;
+  }
+}
+
+async function renderLuuBut() {
+  const khung = document.getElementById("khungluubut");
+  if (!khung) return;
+  khung.innerHTML = '<p style="text-align:center;color:#aaa;font-style:italic;padding:40px 0;">⏳ Đang tải...</p>';
+  try {
+    const data = await layDuLieu();
+    cachedData = data;
+    if (!data.length) {
+      khung.innerHTML = '<p style="text-align:center;color:#aaa;font-style:italic;padding:40px 0;width:100%;">Chưa có lời lưu bút nào. Hãy là người đầu tiên! 🌸</p>';
+      return;
+    }
+    khung.innerHTML = data.map(item => `
+      <div class="sticky-note" style="background:${item.mau};">
+        <div class="sticky-pin">📌</div>
+        <div class="sticky-content">${item.noiDung.replace(/\n/g,'<br>')}</div>
+        <div class="sticky-footer">
+          <span class="sticky-ky">— ${item.kyTen}</span>
+          <span class="sticky-ngay">${item.thoiGian}</span>
+        </div>
+        <button class="btn-xoa-note" onclick="moModalXoa(${item.id})" title="Xóa (Admin)">🗑️</button>
+      </div>
+    `).join("");
+  } catch(e) {
+    khung.innerHTML = '<p style="text-align:center;color:red;padding:40px 0;">❌ Không tải được lưu bút!</p>';
+  }
+}
+
+function moModalXoa(id) {
+  idDangXoa = id;
+  document.getElementById("inputMatKhau").value = "";
+  document.getElementById("thongBaoSai").style.display = "none";
+  document.getElementById("modalXoa").style.display = "flex";
+}
+function dongModalXoa() {
+  document.getElementById("modalXoa").style.display = "none";
+  idDangXoa = null;
+}
+async function xacNhanXoa() {
+  if (document.getElementById("inputMatKhau").value !== ADMIN_PASS) {
+    document.getElementById("thongBaoSai").style.display = "block";
+    return;
+  }
+  try {
+    const data = cachedData.filter(i => i.id !== idDangXoa);
+    await luuDuLieu(data);
+    cachedData = data;
+    dongModalXoa();
+    renderLuuBut();
+  } catch(e) {
+    alert("Lỗi khi xóa, thử lại nhé!");
+  }
+}
+
+
+
+
 
 
 
