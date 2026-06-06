@@ -1082,7 +1082,14 @@
   <div class="form-luubut-box">
     <h3 style="font-family:'Dancing Script',cursive; font-size:26px; color:#7c3aed; margin-bottom:16px;">🗨️ Ghi lại lời yêu thương</h3>
     <textarea id="inputNoiDung" placeholder="Viết lời hay ý đẹp..." maxlength="300"></textarea>
-    <input id="inputKyTen" type="text" placeholder="Ký tên " maxlength="15" />
+    <div style="margin-top:4px;">
+  <p style="font-size:13px;color:#888;margin-bottom:6px;font-family:'Quicksand',sans-serif;">✍️ Vẽ chữ ký của bạn:</p>
+  <div style="position:relative;border:2px solid #e9d5ff;border-radius:12px;overflow:hidden;background:#fffdf7;">
+    <canvas id="kyTenCanvas" width="340" height="90" style="display:block;width:100%;touch-action:none;cursor:crosshair;"></canvas>
+    <span style="position:absolute;bottom:6px;right:10px;font-size:11px;color:#ccc;font-family:'Quicksand',sans-serif;">ký tên vào đây</span>
+  </div>
+  <button type="button" onclick="xoaChuKy()" style="margin-top:6px;background:none;border:1px solid #e9d5ff;border-radius:20px;padding:3px 14px;font-size:12px;color:#a78bfa;cursor:pointer;font-family:'Quicksand',sans-serif;">🗑️ Vẽ lại</button>
+</div>
     <div class="chon-mau">
       <span>Chọn màu:</span>
       <div class="mau-option" style="background:#fff9c4;" data-mau="#fff9c4" onclick="chonMau(this)">💛</div>
