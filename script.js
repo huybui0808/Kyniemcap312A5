@@ -20,6 +20,10 @@
 
 
 
+
+
+
+
 document.addEventListener('DOMContentLoaded', function() {
     let lbAnh = [], lbIndex = 0;
 
@@ -197,7 +201,7 @@ window.addEventListener('DOMContentLoaded', function() {
 });
 
 // ===== PHẦN LƯU BÚT - JSONBIN =====
-const ADMIN_PASS = "HUYbuiTRUNG20081.";
+const ADMIN_PASS = "xoa";
 const BIN_ID = "6a2402c8f5f4af5e29c210b3";
 const API_KEY = "$2a$10$nQb8E2FsCr2IFBogT76xee7Obj2dzRiVQKxV9NEB4Qt6GDYxMfeve";
 const API_URL = `https://api.jsonbin.io/v3/b/${BIN_ID}`;
@@ -246,10 +250,73 @@ function canvasCoNoidung() {
   return false;
 }
 
+let tabKyHienTai = "ten";
+
+function chonTabKy(loai) {
+  tabKyHienTai = loai;
+  const tabTen = document.getElementById("tabKyTen");
+  const tabVe  = document.getElementById("tabKyVe");
+  const panelTen = document.getElementById("panelKyTen");
+  const panelVe  = document.getElementById("panelKyVe");
+  if (loai === "ten") {
+    tabTen.style.background = "#7c3aed"; tabTen.style.color = "#fff";
+    tabVe.style.background  = "#f3e8ff"; tabVe.style.color  = "#7c3aed";
+    panelTen.style.display = "block";
+    panelVe.style.display  = "none";
+  } else {
+    tabVe.style.background  = "#7c3aed"; tabVe.style.color  = "#fff";
+    tabTen.style.background = "#f3e8ff"; tabTen.style.color = "#7c3aed";
+    panelVe.style.display  = "block";
+    panelTen.style.display = "none";
+    setTimeout(() => { khoiDongCanvas(); }, 50);
+  }
+}
+
+function xemTruocKyTen() {
+  const ten = document.getElementById("inputKyTen").value;
+  document.getElementById("xuatKyTen").textContent = ten;
+}
+
+function kyTenCoNoidung() {
+  if (tabKyHienTai === "ten") {
+    return document.getElementById("inputKyTen").value.trim().length > 0;
+  } else {
+    return canvasCoNoidung();
+  }
+}
+
+function layAnhChuKy() {
+  if (tabKyHienTai === "ten") {
+    const ten = document.getElementById("inputKyTen").value.trim();
+    const tmpCanvas = document.createElement("canvas");
+    tmpCanvas.width = 340; tmpCanvas.height = 90;
+    const ctx = tmpCanvas.getContext("2d");
+    ctx.fillStyle = "#fffdf7";
+    ctx.fillRect(0, 0, tmpCanvas.width, tmpCanvas.height);
+    ctx.font = "36px \'Dancing Script\', cursive";
+    ctx.fillStyle = "#4c1d95";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText(ten, tmpCanvas.width / 2, tmpCanvas.height / 2);
+    return tmpCanvas.toDataURL("image/png");
+  } else {
+    return canvasKy.toDataURL("image/png");
+  }
+}
+
 function moFormLuuBut() {
   document.getElementById("formLuuBut").style.display = "flex";
   document.getElementById("inputNoiDung").value = "";
-  setTimeout(() => { khoiDongCanvas(); xoaChuKy(); }, 50);
+  document.getElementById("inputKyTen").value = "";
+  document.getElementById("xuatKyTen").textContent = "";
+  tabKyHienTai = "ten";
+  document.getElementById("tabKyTen").style.background = "#7c3aed";
+  document.getElementById("tabKyTen").style.color = "#fff";
+  document.getElementById("tabKyVe").style.background = "#f3e8ff";
+  document.getElementById("tabKyVe").style.color = "#7c3aed";
+  document.getElementById("panelKyTen").style.display = "block";
+  document.getElementById("panelKyVe").style.display = "none";
+  dangVe = false;
 }
 function dongFormLuuBut() {
   document.getElementById("formLuuBut").style.display = "none";
@@ -284,9 +351,9 @@ async function luuDuLieu(data) {
 async function luuLuuBut() {
   const noiDung = document.getElementById("inputNoiDung").value.trim();
   if (!noiDung) { alert("Bạn chưa viết nội dung!"); return; }
-  if (!canvasCoNoidung()) { alert("Bạn chưa ký tên!"); return; }
+  if (!kyTenCoNoidung()) { alert("Bạn chưa ký tên!"); return; }
 
-  const kyTenImg = canvasKy.toDataURL("image/png");
+  const kyTenImg = layAnhChuKy();
 
   const btnGui = document.querySelector("#formLuuBut .btn-guibut");
   btnGui.textContent = "⏳ Đang gửi...";
@@ -362,15 +429,6 @@ async function xacNhanXoa() {
     alert("Lỗi khi xóa, thử lại nhé!");
   }
 }
-
-
-
-
-
-
-
-
-
 
 
 
