@@ -454,6 +454,24 @@ async function xacNhanXoa() {
 
 
 
+// ===== BẤM 5 LẦN VÀO TIÊU ĐỀ ĐỂ TẮT THÔNG BÁO =====
+let demBop = 0;
+let thoiGianBop = null;
 
+function bopOwner() {
+  demBop++;
+  clearTimeout(thoiGianBop);
+  thoiGianBop = setTimeout(() => { demBop = 0; }, 2000);
+  if (demBop >= 5) {
+    demBop = 0;
+    if (localStorage.getItem("isOwner")) {
+      localStorage.removeItem("isOwner");
+      alert("✅ Đã BẬT thông báo trở lại!");
+    } else {
+      localStorage.setItem("isOwner", "true");
+      alert("🔕 Đã TẮT thông báo cho máy này!");
+    }
+  }
+}
 
 
