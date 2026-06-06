@@ -9,17 +9,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 document.addEventListener('DOMContentLoaded', function() {
     let lbAnh = [], lbIndex = 0;
 
@@ -206,56 +195,14 @@ let mauDaChon = "#fff9c4";
 let idDangXoa = null;
 let cachedData = [];
 
-// ===== CANVAS CHỮ KÝ =====
-let dangVe = false;
-let canvasKy, ctxKy;
-
-function khoiDongCanvas() {
-  canvasKy = document.getElementById("kyTenCanvas");
-  if (!canvasKy) return;
-  ctxKy = canvasKy.getContext("2d");
-  ctxKy.strokeStyle = "#2d2d2d";
-  ctxKy.lineWidth = 2.5;
-  ctxKy.lineCap = "round";
-  ctxKy.lineJoin = "round";
-
-  canvasKy.addEventListener("mousedown", e => { dangVe = true; ctxKy.beginPath(); ctxKy.moveTo(...layToaDo(e)); });
-  canvasKy.addEventListener("mousemove", e => { if (!dangVe) return; ctxKy.lineTo(...layToaDo(e)); ctxKy.stroke(); });
-  canvasKy.addEventListener("mouseup",   () => dangVe = false);
-  canvasKy.addEventListener("mouseleave",() => dangVe = false);
-  canvasKy.addEventListener("touchstart", e => { e.preventDefault(); dangVe = true; ctxKy.beginPath(); ctxKy.moveTo(...layToaDo(e.touches[0])); }, { passive: false });
-  canvasKy.addEventListener("touchmove",  e => { e.preventDefault(); if (!dangVe) return; ctxKy.lineTo(...layToaDo(e.touches[0])); ctxKy.stroke(); }, { passive: false });
-  canvasKy.addEventListener("touchend",   () => dangVe = false);
-}
-
-function layToaDo(e) {
-  const r = canvasKy.getBoundingClientRect();
-  const scaleX = canvasKy.width / r.width;
-  const scaleY = canvasKy.height / r.height;
-  return [(e.clientX - r.left) * scaleX, (e.clientY - r.top) * scaleY];
-}
-
-function xoaChuKy() {
-  if (ctxKy) ctxKy.clearRect(0, 0, canvasKy.width, canvasKy.height);
-}
-
-function canvasCoNoidung() {
-  if (!canvasKy) return false;
-  const d = ctxKy.getImageData(0, 0, canvasKy.width, canvasKy.height).data;
-  for (let i = 3; i < d.length; i += 4) if (d[i] > 0) return true;
-  return false;
-}
-
 function moFormLuuBut() {
   document.getElementById("formLuuBut").style.display = "flex";
   document.getElementById("inputNoiDung").value = "";
-  setTimeout(() => { khoiDongCanvas(); xoaChuKy(); }, 50);
+  document.getElementById("inputKyTen").value = "";
 }
 function dongFormLuuBut() {
   document.getElementById("formLuuBut").style.display = "none";
-  dangVe = false;
 }
-
 function chonMau(el) {
   mauDaChon = el.dataset.mau;
   document.querySelectorAll(".mau-option").forEach(e => e.classList.remove("active-mau"));
@@ -283,10 +230,9 @@ async function luuDuLieu(data) {
 
 async function luuLuuBut() {
   const noiDung = document.getElementById("inputNoiDung").value.trim();
+  const kyTen   = document.getElementById("inputKyTen").value.trim();
   if (!noiDung) { alert("Bạn chưa viết nội dung!"); return; }
-  if (!canvasCoNoidung()) { alert("Bạn chưa ký tên!"); return; }
-
-  const kyTenImg = canvasKy.toDataURL("image/png");
+  if (!kyTen)   { alert("Bạn chưa ký tên!"); return; }
 
   const btnGui = document.querySelector("#formLuuBut .btn-guibut");
   btnGui.textContent = "⏳ Đang gửi...";
@@ -295,7 +241,7 @@ async function luuLuuBut() {
   try {
     const data = await layDuLieu();
     data.unshift({
-      id: Date.now(), noiDung, kyTenImg, mau: mauDaChon,
+      id: Date.now(), noiDung, kyTen, mau: mauDaChon,
       thoiGian: new Date().toLocaleDateString("vi-VN")
     });
     await luuDuLieu(data);
@@ -326,7 +272,7 @@ async function renderLuuBut() {
         <div class="sticky-pin">📌</div>
         <div class="sticky-content">${item.noiDung.replace(/\n/g,'<br>')}</div>
         <div class="sticky-footer">
-          <span class="sticky-ky">${item.kyTenImg ? `<img src="${item.kyTenImg}" style="max-width:100px;max-height:36px;display:block;">` : `— ${item.kyTen||''}`}</span>
+          <span class="sticky-ky">— ${item.kyTen}</span>
           <span class="sticky-ngay">${item.thoiGian}</span>
         </div>
         <button class="btn-xoa-note" onclick="moModalXoa(${item.id})" title="Xóa (Admin)">🗑️</button>
@@ -362,14 +308,6 @@ async function xacNhanXoa() {
     alert("Lỗi khi xóa, thử lại nhé!");
   }
 }
-
-
-
-
-
-
-
-
 
 
 
