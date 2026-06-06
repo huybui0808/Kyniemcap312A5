@@ -201,7 +201,7 @@ window.addEventListener('DOMContentLoaded', function() {
 });
 
 // ===== PHẦN LƯU BÚT - JSONBIN =====
-const ADMIN_PASS = "xoa";
+const ADMIN_PASS = "xacnhanxoa";
 const BIN_ID = "6a2402c8f5f4af5e29c210b3";
 const API_KEY = "$2a$10$nQb8E2FsCr2IFBogT76xee7Obj2dzRiVQKxV9NEB4Qt6GDYxMfeve";
 const API_URL = `https://api.jsonbin.io/v3/b/${BIN_ID}`;
@@ -293,7 +293,7 @@ function layAnhChuKy() {
     const ctx = tmpCanvas.getContext("2d");
     ctx.fillStyle = "#fffdf7";
     ctx.fillRect(0, 0, tmpCanvas.width, tmpCanvas.height);
-    ctx.font = "36px \'Dancing Script\', cursive";
+    ctx.font = "56px \'Dancing Script\', cursive";
     ctx.fillStyle = "#4c1d95";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
