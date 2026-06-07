@@ -193,7 +193,7 @@ window.addEventListener("DOMContentLoaded", function () {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     chat_id: "6091315052",
-                    text: `👀 Có người vào trang web!\n📅 Lúc: ${new Date().toLocaleString("vi-VN")}`
+                    text: `👀 Có người vào trang web!\n\n📅 Lúc: \n\n ${new Date().toLocaleString("vi-VN")}`
                 })
             }
         );
@@ -454,7 +454,7 @@ async function luuLuuBut() {
     } catch (e) {
         alert("Lỗi kết nối, thử lại nhé!");
     } finally {
-        btnGui.textContent = "💾 Gửi lời lưu bút";
+        btnGui.textContent = " 💌 Gửi lời lưu bút";
         btnGui.disabled = false;
     }
 }
@@ -552,7 +552,7 @@ function hieUngTim() {
         "💜",
         "💝",
         "🩷",
-        "🤍",
+        "Chúc các con vợ đỗ NV 1",
         "♥️",
         "🥳",
         "💯",
@@ -570,10 +570,10 @@ function hieUngTim() {
         font-size: ${item.length > 2 ? Math.random() * 8 + 10 : Math.random() * 20 + 16}px;
         z-index: 999999;
         pointer-events: none;
-        animation: roiXuong ${Math.random() * 4 + 4}s linear forwards;
+        animation: roiXuong ${Math.random() * 3.5 + 3.5}s linear forwards;
       `;
             document.body.appendChild(tim);
-            setTimeout(() => tim.remove(), 8000);
+            setTimeout(() => tim.remove(), 7000);
         }, i * 90);
     }
 }
