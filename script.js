@@ -621,3 +621,29 @@ function hieUngTim() {
         { passive: true }
     );
 })();
+
+// ===== ĐỒNG HỒ HOẠT ĐỘNG =====
+(function() {
+  // Ngày tạo web — đổi theo ngày thật của bạn
+  const NGAY_TAO = new Date("2026-05-31T12:00:00");
+
+  function capNhatDongHo() {
+    const now = new Date();
+    const diff = Math.floor((now - NGAY_TAO) / 1000);
+    if (diff < 0) return;
+
+    const ngay  = Math.floor(diff / 86400);
+    const gio   = Math.floor((diff % 86400) / 3600);
+    const phut  = Math.floor((diff % 3600) / 60);
+    const giay  = diff % 60;
+
+    const pad = (n, d=2) => String(n).padStart(d, '0');
+    document.getElementById("dh-ngay").textContent = pad(ngay, 3);
+    document.getElementById("dh-gio").textContent  = pad(gio);
+    document.getElementById("dh-phut").textContent = pad(phut);
+    document.getElementById("dh-giay").textContent = pad(giay);
+  }
+
+  capNhatDongHo();
+  setInterval(capNhatDongHo, 1000);
+})();

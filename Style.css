@@ -19,25 +19,54 @@ body {
     #lb-prev {
         opacity: 0;
     }
-    .anhtesst {
-        margin-left: 10px;
-        margin-right: 10px;
+    .card  .khoianhtesst { display: none ; gap: 10px;
+   
     }
     .anhtesst .anhcanhan {
-        width: 100px;
+        width: 90px !important;
     }
     .chutieude h1 {
-        font-size: 40px;
+        font-size: 40px !important;
     }
     .chutieude #duoichutieude {
-        font-size: 11px;
+        font-size: 11px !important;
     }
     .link {
+        font-size: 12px !important;
+    }
+        .sticky-note {
+        width: 150px;
+        min-height: 150px;
+        padding: 32px 12px 46px;
+    }
+    .sticky-content {
         font-size: 14px;
+        line-height: 24px;
     }
-    .navbar .danhsach {
-        margin-left: 12px;
+    .card { height: 700px !important;
+        width: 300px;  margin:0 auto !important;
     }
+    .card::-webkit-scrollbar { display: none !important;
+}
+.card::-webkit-scrollbar-track { display: none !important;
+}
+.card::-webkit-scrollbar-thumb { display: none !important;
+}
+.khung-dongho {  box-shadow: 0 1px 20px rgba(0, 0, 0, 0.25) !important; 
+  padding: 20px 10px 20px !important;
+
+}
+
+.dongho-wrap {
+  gap:  5px !important;
+  
+}
+.dongho-item {
+  min-width: 20px !important;
+}
+.dongho-item span {
+  font-size: 16px !important;
+}
 }
 
 @media (min-width: 1024px) {
@@ -341,6 +370,64 @@ h1 {
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+/* ===== ĐỒNG HỒ HOẠT ĐỘNG ===== */
+.khung-dongho {  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15); border-radius: 30px;
+  text-align: center; 
+  padding: 30px 20px 20px;
+  margin: 40px auto 10px;
+  max-width: 600px;
+}
+.dongho-title {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: #9333ea;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.dongho-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.dongho-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(255,255,255,0.85);
+  border-radius: 16px;
+  padding: 16px 20px;
+  min-width: 75px;
+  box-shadow: 0 4px 20px rgba(167,139,250,0.15);
+  border: 1px solid rgba(167,139,250,0.2);
+}
+.dongho-item span {
+  font-family: 'Quicksand', sans-serif;
+  font-size: clamp(28px, 6vw, 46px);
+  font-weight: 900;
+  color: #7c3aed;
+  letter-spacing: 1px;
+  line-height: 1;
+}
+.dongho-item small {
+  font-size: 11px;
+  color: #a78bfa;
+  margin-top: 6px;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.dongho-sep {
+  font-size: clamp(24px, 5vw, 36px);
+  font-weight: 900;
+  color: #c4b5fd;
+  margin-bottom: 20px;
 }
 
 /*  CHỮ THƯỚC PHIM KỶ NIỆM */
@@ -877,17 +964,7 @@ body.no-scroll {
         opacity: 1;
     }
 }
-@media (max-width: 420px) {
-    .sticky-note {
-        width: 150px;
-        min-height: 150px;
-        padding: 32px 12px 46px;
-    }
-    .sticky-content {
-        font-size: 14px;
-        line-height: 24px;
-    }
-}
+
 
 /* ===== HIỆU ỨNG TIM RƠI ===== */
 @keyframes roiXuong {
@@ -911,3 +988,5 @@ body.no-scroll {
         transform: translate(-50%, -150%) scale(0.3);
     }
 }
+
+
