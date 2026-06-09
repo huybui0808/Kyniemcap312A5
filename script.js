@@ -202,7 +202,7 @@ window.addEventListener("DOMContentLoaded", function () {
 });
 
 // ===== PHẦN LƯU BÚT - JSONBIN =====
-const ADMIN_PASS = "Huyxacnhanxoa";
+const ADMIN_HASH = "4ea414373a986d8ab93a31dc21de2475fbecc470648380e9c819c845185532d5";
 const BIN_ID = "6a2402c8f5f4af5e29c210b3";
 const API_KEY = "$2a$10$nQb8E2FsCr2IFBogT76xee7Obj2dzRiVQKxV9NEB4Qt6GDYxMfeve";
 const API_URL = `https://api.jsonbin.io/v3/b/${BIN_ID}`;
@@ -504,7 +504,11 @@ function dongModalXoa() {
     idDangXoa = null;
 }
 async function xacNhanXoa() {
-    if (document.getElementById("inputMatKhau").value !== ADMIN_PASS) {
+    const input = document.getElementById("inputMatKhau").value;
+    const encoder = new TextEncoder();
+    const buf = await crypto.subtle.digest("SHA-256", encoder.encode(input));
+    const hash = [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2,'0')).join('');
+    if (hash !== ADMIN_HASH) {
         document.getElementById("thongBaoSai").style.display = "block";
         return;
     }
@@ -647,3 +651,4 @@ function hieUngTim() {
   capNhatDongHo();
   setInterval(capNhatDongHo, 1000);
 })();
+
